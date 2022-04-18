@@ -1,9 +1,12 @@
-// verified: 2022-04-18
+
 #include <cstdlib>
+#include <iostream>
 #include <vector>
 #include <cmath>
 
 #include "../lib/dnn.hpp"
+#include "../lib/data.hpp"
+#include "../lib/bar.hpp"
 
 double relu(double x) { return x > 0.00 ? x : 0.00; }
 double relu_prime(double x) { return x > 0.00 ? 1.00 : 0.00; }
@@ -100,5 +103,67 @@ void DNN::fit(std::vector<double> &x, std::vector<double> &y, double alpha, unsi
     }
 
     std::vector<double>().swap(yhat);
+}
+
+void DNN::train(std::vector<std::vector<double>> &train_x, std::vector<std::vector<double>> &train_y,
+                unsigned int epoch, unsigned int iteration, unsigned int batch_size, double alpha, double decay) {
+    unsigned int batch_num = 1;
+    unsigned int batch_start = 0;
+    unsigned int batch_end = batch_size;
+
+    double loss_t = 0.00;
+
+    for(unsigned int e = 1; e <= epoch; e++) {
+        shuffle(train_x, train_y);
+        std::cout << "=======================================EPOCH " + std::to_string(e) + "=======================================\n";
+
+        while(batch_start < train_x.size()) {
+            std::vector<std::vector<double>> batch_x = {train_x.begin() + batch_start, train_x.begin() + batch_end};
+            std::vector<std::vector<double>> batch_y = {train_y.begin() + batch_start, train_y.begin() + batch_end};
+
+            for(unsigned int i = 1; i <= iteration; i++) {
+                 for(unsigned int k = 0; k < batch_x.size(); k++)
+                     fit(batch_x[k], batch_y[k], alpha, train_x.size());
+
+                 double loss = 0.00;
+                 for(unsigned int k = 0; k < batch_x.size(); k++) {
+                     std::vector<double> yhat = predict(batch_x[k]);
+                     loss += mse(batch_y[k], yhat);
+
+                     std::vector<double>().swap(yhat);
+                 }
+                 loss /= batch_x.size();
+
+                 progress_bar(i, iteration, "BATCH " + std::to_string(batch_num) + " [LOSS = " + std::to_string(loss) + "]");
+            }
+
+            std::vector<std::vector<double>>().swap(batch_x);
+            std::vector<std::vector<double>>().swap(batch_y);
+
+            batch_num++;
+            batch_start += batch_size;
+            batch_end + batch_size < train_x.size() ? batch_end += batch_size : batch_end = train_x.size();
+        }
+
+        std::cout << "\n";
+        if(e != 1) std::cout << "PREVIOUS EPOCH LOSS = " << loss_t << "\n";
+
+        loss_t = 0.00;
+        for(unsigned int k = 0; k < train_x.size(); k++) {
+            std::vector<double> yhat = predict(train_x[k]);
+            loss_t += mse(train_y[k], yhat);
+
+            std::vector<double>().swap(yhat);
+        }
+        loss_t /= train_x.size();
+
+        std::cout << "CURRENT EPOCH LOSS  = " << loss_t << "\n\n";
+
+        batch_num = 1;
+        batch_start = 0;
+        batch_end = batch_size;
+
+        if(e % (int)(epoch / 10) == 0) alpha *= 1.00 - decay;
+    }
 }
 

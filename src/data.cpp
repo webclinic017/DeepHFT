@@ -1,4 +1,4 @@
-// verified: 2022-04-18
+
 #include <cstdlib>
 #include <vector>
 #include <string>

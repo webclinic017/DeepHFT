@@ -1,4 +1,4 @@
-// verified: 2022-04-18
+
 #ifndef __DNN_HPP_
 #define __DNN_HPP_
 
@@ -77,6 +77,8 @@ public:
 
     std::vector<double> predict(std::vector<double> &x);
     void fit(std::vector<double> &x, std::vector<double> &y, double alpha, unsigned int dataset_size);
+    void train(std::vector<std::vector<double>> &train_x, std::vector<std::vector<double>> &train_y,
+               unsigned int epoch, unsigned int iteration, unsigned int batch_size, double alpha, double decay);
 };
 
 #endif
