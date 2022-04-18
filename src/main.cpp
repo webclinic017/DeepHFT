@@ -11,7 +11,7 @@
 
 int main(int argc, char *argv[])
 {
-    std::vector<double> dat = read("./temp/sample");
+    std::vector<double> dat = read("./temp/dataset");
 
     std::vector<std::vector<double>> x, y;
     for(unsigned int t = 0; t < dat.size() - 14; t++) {

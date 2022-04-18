@@ -1,4 +1,4 @@
-
+// verified: 2022-04-18
 #ifndef __DATA_HPP_
 #define __DATA_HPP_
 

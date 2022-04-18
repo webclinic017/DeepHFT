@@ -1,4 +1,4 @@
-
+// verified: 2022-04-18
 #ifndef __PROGRESS_BAR_HPP_
 #define __PROGRESS_BAR_HPP_
 

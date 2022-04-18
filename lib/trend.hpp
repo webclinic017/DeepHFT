@@ -19,7 +19,7 @@ public:
 
     void run();
     void fit(unsigned int epoch, unsigned int iteration, unsigned int batch_size, double alpha, double decay, double test);
-    void update(unsigned int epoch, unsigned int iteration, unsigned int batch_size, double alpha, double decay);
+    void update();
 
     void save();
     void load();
