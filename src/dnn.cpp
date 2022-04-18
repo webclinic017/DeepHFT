@@ -90,7 +90,7 @@ void DNN::fit(std::vector<double> &x, std::vector<double> &y, double alpha, unsi
                     (*layers[l-1].nodes())[i].add_error(partial_gradient * (*weights)[i]);
                 }
                 else
-                    gradient = partial_gradient * x[i];
+                   gradient = partial_gradient * x[i];
 
                 gradient += 1.00 / dataset_size * (*weights)[i]; // L2 Regularization
 
