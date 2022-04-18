@@ -1,3 +1,4 @@
+// verified: 2022-04-18
 #ifndef __DNN_HPP_
 #define __DNN_HPP_
 
