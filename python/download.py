@@ -14,6 +14,7 @@ api = alpaca.REST(key_id=api_key_id, secret_key=api_secret, base_url=alpaca.rest
 
 def historical(ticker:str):
     df = pd.DataFrame(api.get_bars(ticker, alpaca.rest.TimeFrame.Minute, "2000-01-01", datetime.today().strftime("%Y-%m-%d")).df)
+    # save close value to ./temp/dataset
 
 #def real_time(ticker:str):
 
