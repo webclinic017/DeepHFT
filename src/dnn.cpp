@@ -32,7 +32,7 @@ double Node::activation() { return act; }
 double Node::error() { return err; }
 std::vector<double> *Node::weights() { return &w; }
 
-void Node::set_summation(double val) { sum = val + bias; }
+void Node::set_summation(double dot) { sum = dot + bias; }
 void Node::compute_activation() { act = relu(sum); }
 void Node::add_error(double val) { err += val; }
 void Node::update_bias(double delta) { bias -= delta; }

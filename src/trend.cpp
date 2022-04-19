@@ -13,7 +13,7 @@ void TrendHFT::sample_dataset(std::vector<std::vector<double>> &x, std::vector<s
         std::vector<double> x_t = {dat.begin() + t, dat.begin() + t + 10}; // past 10 min
         normalize(x_t);
 
-        // future delta (+1 min, +3 min, +5 min)
+        // future delta (1 min, 3 min, 5 min)
         double delta1 = relu((dat[t+10] - dat[t+9]) * 100 / dat[t+9]);
         double delta3 = relu((dat[t+12] - dat[t+9]) * 100 / dat[t+9]);
         double delta5 = relu((dat[t+14] - dat[t+9]) * 100 / dat[t+9]);
@@ -41,7 +41,7 @@ void TrendHFT::build() {
     std::vector<std::vector<double>>().swap(y);
 
     double alpha = 0.001;
-    double decay = 0.01;
+    double decay = 0.001;
 
     unsigned int epoch       = 10000;
     unsigned int iteration   = 1000;

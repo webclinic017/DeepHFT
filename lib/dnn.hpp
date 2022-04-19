@@ -40,7 +40,7 @@ public:
     double error();
     std::vector<double> *weights();
 
-    void set_summation(double val);
+    void set_summation(double dot);
     void compute_activation();
     void add_error(double val);
     void update_bias(double delta);
