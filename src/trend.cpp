@@ -47,7 +47,7 @@ void TrendHFT::build() {
     unsigned int epoch       = 10000;
     unsigned int iteration   = 1000;
     unsigned int batch_size  = 100;
-/*
+
     model.train(train_x, train_y, epoch, iteration, batch_size, alpha, decay);
 
     std::vector<std::vector<double>>().swap(train_x);
@@ -68,7 +68,7 @@ void TrendHFT::build() {
 
     std::vector<std::vector<double>>().swap(test_x);
     std::vector<std::vector<double>>().swap(test_y);
-*/
+
     // --- //
 
     model.save("./models/trend/" + ticker + "/checkpoint");

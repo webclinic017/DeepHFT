@@ -53,7 +53,6 @@ void DNN::load(std::string path) {
                     }
                     else {
                         (*weights)[count] = std::stod(val);
-                        std::cout << (*weights)[count] << "\n";
                         count++;
 
                         val = "";
