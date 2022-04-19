@@ -27,15 +27,16 @@ void Node::init() {
     err = 0.00;
 }
 
+double Node::bias() { return b; }
 double Node::summation() { return sum; }
 double Node::activation() { return act; }
 double Node::error() { return err; }
 std::vector<double> *Node::weights() { return &w; }
 
-void Node::set_summation(double dot) { sum = dot + bias; }
+void Node::set_summation(double dot) { sum = dot + b; }
 void Node::compute_activation() { act = relu(sum); }
 void Node::add_error(double val) { err += val; }
-void Node::update_bias(double delta) { bias -= delta; }
+void Node::update_bias(double delta) { b -= delta; }
 
 // --- //
 

@@ -15,7 +15,7 @@ public:
     TrendHFT() {}
     TrendHFT(std::string _ticker): ticker(_ticker) {
         model = DNN({{10,7},{7,5},{5,3}});
-        // load existing model
+        model.load("./models/trend/" + ticker + "/checkpoint");
     }
 
     void sample_dataset(std::vector<std::vector<double>> &x, std::vector<std::vector<double>> &y);
@@ -23,9 +23,6 @@ public:
     void run();
     void build();
     void update();
-
-    void save();
-    void load();
 };
 
 #endif
